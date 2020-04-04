@@ -21,29 +21,30 @@ public class DonationDTO {
 
 
     private Long id;
-    @NotNull//nie wiem dlaczego nie działa mi message.properties pewnie security
-    @Min(value = 1, message = "{tomasz.lacina.message}")
+    @NotNull
+    @Min(value = 1)
     private Integer quantity;
-    @NotBlank(message = "Pole nie może być puste")
+    @NotBlank
     private String street;
-    @NotBlank(message = "Pole nie może być puste")
+    @NotBlank
     private String city;
-    @Pattern(regexp = "^[0-9]{2}(?:-[0-9]{3})?$", message = "Podany kod pocztowy jest nieprawidłowy. Prawidłowy format to: ##-###")
+    @NotBlank
+    @Pattern(regexp = "^[0-9]{2}(?:-[0-9]{3})?$")
     private String zipCode;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @FutureOrPresent(message = "Proszę wybrać inny termin dostawy. Wymagana przyszła data")
-    @NotNull(message = "Pole nie może być puste")
+    @FutureOrPresent
+    @NotNull
     private LocalDate pickUpDate;
-    @NotNull(message = "Pole nie może być puste")
+    @NotNull
     private LocalTime pickUpTime;
     private String pickUpComment;
-    @Pattern(regexp = "^^\\+(?:[0-9]●?){6,14}[0-9]$", message = "Podany numer telefonu jest nieprawidłowy. Prawidłowy format to np.: +48#########")
+    @Pattern(regexp = "^^\\+(?:[0-9]●?){6,14}[0-9]$")
     private String phoneNumber;
 
-    @Checkbox(message = "Należy zaznaczyć przynajmniej jedno pole")
+    @Checkbox
     private List<Category> categories;
 
-    @NotNull(message = "Należy zaznaczyć jedno pole")
+    @NotNull
     private Institution institution;
 
 }

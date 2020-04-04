@@ -6,14 +6,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.charity.entities.User;
+import pl.coderslab.charity.repositories.UserRepository;
 
 @Component
 public class StarterDataCreator implements ApplicationRunner {
 
     private final PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
 
-    public StarterDataCreator(PasswordEncoder passwordEncoder) {
+    public StarterDataCreator(PasswordEncoder passwordEncoder, UserRepository userRepository) {
         this.passwordEncoder = passwordEncoder;
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -22,7 +25,6 @@ public class StarterDataCreator implements ApplicationRunner {
         createAdmin();
     }
 
-    // TODO user dto zapis do bazy danych
     private void createAdmin() {
         User user = new User();
         user.setFirstName("Admin");
@@ -33,5 +35,8 @@ public class StarterDataCreator implements ApplicationRunner {
         user.setActive(true);
         user.setRole("ROLE_ADMIN");
 
+        if (!userRepository.existsUserByUsername(user.getUsername()) || !userRepository.existsUserByEmail(user.getEmail())){
+            userRepository.save(user);
+        }
     }
 }
