@@ -6,11 +6,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.coderslab.charity.converters.InstitutionConverter;
 import pl.coderslab.charity.dtos.InstitutionDTO;
-import pl.coderslab.charity.entities.Institution;
 import pl.coderslab.charity.repositories.DonationRepository;
+import pl.coderslab.charity.services.DonationService;
 import pl.coderslab.charity.services.InstitutionService;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,18 +18,18 @@ import java.util.stream.Collectors;
 @RequestMapping("/")
 public class HomeController {
     private final InstitutionService institutionService;
-    private final DonationRepository donationRepository;
+    private final DonationService donationService;
 
-    public HomeController(InstitutionService institutionService, DonationRepository donationRepository) {
+    public HomeController(InstitutionService institutionService, DonationService donationService) {
         this.institutionService = institutionService;
-        this.donationRepository = donationRepository;
+        this.donationService = donationService;
     }
 
     @RequestMapping("")
     public String homeAction(Model model) {
 
-        model.addAttribute("sumOfQuantity", donationRepository.querySumOfQuantity());
-        model.addAttribute("sumOfDonation", donationRepository.querySumOfDonation());
+        model.addAttribute("sumOfQuantity", donationService.sumOfQuantity());
+        model.addAttribute("sumOfDonation", donationService.sumOfDonation());
 
         return "index";
     }

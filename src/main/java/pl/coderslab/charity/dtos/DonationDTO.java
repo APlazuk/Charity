@@ -6,7 +6,6 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 import pl.coderslab.charity.entities.Category;
 import pl.coderslab.charity.entities.Institution;
-import pl.coderslab.charity.entities.User;
 import pl.coderslab.charity.validators.Checkbox;
 
 
