@@ -31,29 +31,43 @@
 
 <section class="steps" id="steps">
 
-    <h2>Dodaj - Instytucje</h2>
+    <h2>Dodaj - Administratora</h2>
 
     <div class="container--70 mx-auto mt-5">
 
-        <form:form cssStyle="font-size: medium" modelAttribute="institution" action="/admin/addInstitution" method="post">
+        <form:form cssStyle="font-size: medium" modelAttribute="admin" action="/admin/addAdmin" method="post">
 
             <div class="form-group">
-                <form:label path="name">Nazwa Fundacji</form:label>
-                <form:input path="name" type="text" />
-                <form:errors path="name"/>
+                <form:input path="username" type="text" placeholder="Nazwa Administratora"/></br>
+                <form:errors path="username"/>
             </div>
 
             <div class="form-group">
-                <form:label path="description">Cel i misja</form:label>
-                <form:input path="description" type="text"/>
-                <form:errors path="description"/>
+                <form:input path="email" type="text" placeholder="Email"/></br>
+                <form:errors path="email"/>
             </div>
             <div class="form-group">
-            <button type="submit" class="btn btn--without-border">Dodaj Fundację</button>
+                <form:input path="firstName" type="text" placeholder="Imię"/></br>
+                <form:errors path="firstName"/>
             </div>
-         </form:form>
-
-        </div>
+            <div class="form-group">
+                <form:input path="lastName" type="text" placeholder="Nazwisko"/></br>
+                <form:errors path="lastName"/>
+            </div>
+            <div class="form-group">
+                <input id="password" type="password" name="password" placeholder="Hasło"/></br>
+                <form:errors path="password" cssClass="error-small"/>
+            </div>
+            <div class="form-group">
+                <input id="password2" type="password" name="password2" placeholder="Powtórz hasło"/></br>
+                <form:errors path="password" cssClass="error-small"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn--without-border">Dodaj Administratora</button>
+            </div>
+        </form:form>
+        <a href="/admin/admins" class="btn btn--without-border">Wróc</a>
+    </div>
 </section>
 
 <jsp:include page="./../templates/footer.jsp"/>

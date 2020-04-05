@@ -35,25 +35,23 @@
 
     <div class="container--70 mx-auto mt-5">
 
-        <form:form cssStyle="font-size: medium" modelAttribute="editedInstitution" method="post">
+        <form:form cssStyle="font-size: medium" modelAttribute="institution" action="/admin/addInstitution" method="post">
 
             <div class="form-group">
-                <form:label path="name">Nazwa Fundacji</form:label>
-                <form:input path="name" type="text" />
+                <form:input path="name" type="text" placeholder="Nazwa Fundacji"/></br>
                 <form:errors path="name"/>
             </div>
 
             <div class="form-group">
-                <form:label path="description">Cel i misja</form:label>
-                <form:input path="description" type="text"/>
+                <form:input path="description" type="text" placeholder="Cel i misja"/></br>
                 <form:errors path="description"/>
             </div>
             <div class="form-group">
-                <button type="submit" class="btn btn--without-border">Zatwierdź zmiany</button>
+            <button type="submit" class="btn btn--without-border">Dodaj Fundację</button>
             </div>
-        </form:form>
+         </form:form>
 
-    </div>
+        </div>
 </section>
 
 <jsp:include page="./../templates/footer.jsp"/>

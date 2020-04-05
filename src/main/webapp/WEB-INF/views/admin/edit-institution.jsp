@@ -27,39 +27,34 @@
             </li>
         </ul>
     </nav>
+</header>
 
-<section>
+<section class="steps" id="steps">
 
-    <section class="steps" id="steps">
-        <h2>Panel Administartora</h2>
+    <h2>Edytuj - Instytucje</h2>
 
-        <div class="steps--container">
-            <div class="steps--item">
-                <span class="icon icon--glasses"></span>
-                <h3>Instytucje</h3>
-                <div class="form-group form-group--buttons">
-                    <a href="/admin/institutions" type="button" class="btn btn--without-border" >Zarządzaj instytucjami</a>
-                </div>
+    <div class="container--70 mx-auto mt-5">
+
+        <form:form cssStyle="font-size: medium" modelAttribute="editedInstitution" method="post">
+
+            <div class="form-group">
+                <form:input path="name" type="text" placeholder="Nazwa Fundacji"/></br>
+                <form:errors path="name"/>
             </div>
-            <div class="steps--item">
-                <span class="icon icon--gear"></span>
-                <h3>Administratorzy</h3>
-                <div class="form-group form-group--buttons">
-                    <a href="/admin/admins" type="button" class="btn btn--without-border" >Zarządzaj administratorami</a>
-                </div>
+
+            <div class="form-group">
+                <form:input path="description" type="text" placeholder="Cel i misja"/></br>
+                <form:errors path="description"/>
             </div>
-            <div class="steps--item">
-                <span class="icon icon--courier"></span>
-                <h3>Użytkownicy</h3>
-                <div class="form-group form-group--buttons">
-                    <a href="#" type="button" class="btn btn--without-border" >Zarządzaj użytkownikami</a>
-                </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn--without-border">Zatwierdź zmiany</button>
             </div>
-        </div>
+        </form:form>
+        <a href="/admin" class="btn btn--without-border">Wróc</a>
+    </div>
 </section>
 
-
-
 <jsp:include page="./../templates/footer.jsp"/>
+
 </body>
 </html>

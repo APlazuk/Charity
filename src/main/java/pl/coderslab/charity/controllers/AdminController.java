@@ -5,8 +5,13 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.coderslab.charity.converters.InstitutionConverter;
+import pl.coderslab.charity.converters.RegistrationConverter;
+import pl.coderslab.charity.converters.UserConverter;
 import pl.coderslab.charity.dtos.InstitutionDTO;
+import pl.coderslab.charity.dtos.RegistrationDTO;
+import pl.coderslab.charity.dtos.UserDTO;
 import pl.coderslab.charity.services.InstitutionService;
+import pl.coderslab.charity.services.UserService;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -18,9 +23,11 @@ import java.util.stream.Collectors;
 public class AdminController {
 
     private final InstitutionService institutionService;
+    private final UserService userService;
 
-    public AdminController(InstitutionService institutionService) {
+    public AdminController(InstitutionService institutionService, UserService userService) {
         this.institutionService = institutionService;
+        this.userService = userService;
     }
 
     @ModelAttribute("institutions")
@@ -47,13 +54,13 @@ public class AdminController {
     public String addInstitution(Model model) {
         model.addAttribute("institution", new InstitutionDTO());
 
-        return "admin/addInstitution";
+        return "admin/add-institution";
     }
 
     @PostMapping("/addInstitution")
     public String addInstitution(@Valid @ModelAttribute ("institution") InstitutionDTO institutionDTO, BindingResult result){
         if (result.hasErrors()){
-            return "admin/addInstitution";
+            return "admin/add-institution";
         }
 
         institutionService.addInstitution(InstitutionConverter.from(institutionDTO));
@@ -66,13 +73,13 @@ public class AdminController {
         InstitutionDTO editedInstitution = InstitutionConverter.toInstitutionDTO(institutionService.getInstitutionById(id));
         model.addAttribute("editedInstitution",editedInstitution);
 
-        return "admin/editInstitution";
+        return "admin/edit-institution";
     }
 
     @PostMapping("/editInstitution/{id}")
     public String editInstitution(@Valid @ModelAttribute ("editedInstitution") InstitutionDTO editedInstitution, BindingResult result){
         if (result.hasErrors()){
-            return "admin/editInstitution";
+            return "admin/edit-institution";
         }
 
         institutionService.editInstitution(editedInstitution);
@@ -86,5 +93,82 @@ public class AdminController {
         institutionService.deleteInstitutionById(id);
 
         return "redirect:/admin/institutions";
+    }
+
+    @ModelAttribute("admins")
+    public List<UserDTO> adminList(){
+        return userService.adminList().stream().map(user -> UserConverter.toUserDTO(user)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/admins")
+    public String menageAdmins() {
+        return "admin/admins";
+    }
+
+    @GetMapping("/changeAdminStatus/{id}/{active}")
+    public String changeAdminStatus(@PathVariable Long id, @PathVariable Boolean active){
+        userService.changeAdminStatus(id, active);
+        return "redirect:/admin/admins";
+    }
+
+    @GetMapping("/addAdmin")
+    public String addAdmin(Model model){
+        model.addAttribute("admin", new RegistrationDTO());
+
+        return "admin/add-admin";
+    }
+
+    @PostMapping("/addAdmin")
+    public String addAdmin(@Valid @ModelAttribute("admin") RegistrationDTO admin, BindingResult result){
+        if (result.hasErrors()){
+            return "admin/add-admin";
+        }
+        userService.addAdmin(RegistrationConverter.from(admin));
+
+        return "redirect:/admin/admins";
+    }
+
+    @ModelAttribute("users")
+    public List<UserDTO> userList() {
+        return userService.userList().stream().map(user -> UserConverter.toUserDTO(user)).collect(Collectors.toList());
+    }
+
+    @GetMapping("/addUserAsAdmin")
+    public String usersAsAdmin(){
+        return "admin/add-admin-from-users";
+    }
+
+    @GetMapping("/addUserAsAdmin/{id}")
+    public String addUserAsAdmin(@PathVariable Long id){
+        userService.addUserAsAdmin(id);
+
+        return "redirect:/admin/admins";
+    }
+
+    @GetMapping("/editAdmin/{id}")
+    public String editAdmin(Model model, @PathVariable Long id) {
+        UserDTO editedAdmin = UserConverter.toUserDTO(userService.getAdminById(id));
+        model.addAttribute("editedAdmin",editedAdmin);
+
+        return "admin/edit-admin";
+    }
+
+    @PostMapping("/editAdmin/{id}")
+    public String editAdmin(@Valid @ModelAttribute ("editedAdmin") UserDTO editedAdmin, BindingResult result){
+        if (result.hasErrors()){
+            return "admin/edit-admin";
+        }
+
+        userService.editAdmin(editedAdmin);
+
+        return "redirect:/admin/admins";
+    }
+
+    @RequestMapping("/deleteAdmin/{id}")
+    public String deleteIAdmin(@PathVariable Long id){
+
+        userService.deleteAdminById(id);
+
+        return "redirect:/admin/admins";
     }
 }
