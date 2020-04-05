@@ -14,4 +14,14 @@ public class InstitutionConverter {
 
         return institutionDTO;
     }
+
+    public static Institution from(InstitutionDTO institutionDTO){
+        Institution institution = new Institution();
+
+        institution.setId(institutionDTO.getId());
+        institution.setName(institutionDTO.getName());
+        institution.setDescription(institutionDTO.getDescription());
+
+        return institution;
+    }
 }

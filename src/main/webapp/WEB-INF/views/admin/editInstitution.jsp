@@ -29,37 +29,34 @@
     </nav>
 </header>
 
-
 <section class="steps" id="steps">
 
-    <h2>Panel Administartora - Instytucje</h2>
+    <h2>Dodaj - Instytucje</h2>
 
     <div class="container--70 mx-auto mt-5">
 
-        <table class="table text-left" style="font-size: medium">
-            <thead class="thead-light" style="font-size: large">
-            <th>Nazwa Instytucji</th>
-            <th>Opis działaności</th>
-            <th colspan="2"></th>
-            </thead>
+        <form:form cssStyle="font-size: medium" modelAttribute="editedInstitution" method="post">
 
-            <c:forEach items="${institutions}" var="institution">
-                <tr>
-                    <td>${institution.name}</td>
-                    <td>${institution.description}</td>
-                    <td><a class="btn--small btn--without-border" href="/admin/editInstitution/${institution.id}">Edytuj</a></td>
-                    <td><a class="btn--small btn--without-border" href="/admin/deleteInstitution/${institution.id}">Usuń</a></td>
-                </tr>
+            <div class="form-group">
+                <form:label path="name">Nazwa Fundacji</form:label>
+                <form:input path="name" type="text" />
+                <form:errors path="name"/>
+            </div>
 
-            </c:forEach>
-        </table>
+            <div class="form-group">
+                <form:label path="description">Cel i misja</form:label>
+                <form:input path="description" type="text"/>
+                <form:errors path="description"/>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn--without-border">Zatwierdź zmiany</button>
+            </div>
+        </form:form>
+
     </div>
-
-    <br/>
-    <a href="/admin" class="btn btn--without-border">Wróc</a>
-    <a href="/admin/addInstitution" class="btn btn--without-border btn--highlighted">Dodaj pozycję</a>
 </section>
 
 <jsp:include page="./../templates/footer.jsp"/>
+
 </body>
 </html>

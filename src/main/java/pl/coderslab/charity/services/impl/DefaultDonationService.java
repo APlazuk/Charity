@@ -2,6 +2,7 @@ package pl.coderslab.charity.services.impl;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.charity.entities.Donation;
 import pl.coderslab.charity.entities.User;
 import pl.coderslab.charity.repositories.DonationRepository;
@@ -9,6 +10,7 @@ import pl.coderslab.charity.repositories.UserRepository;
 import pl.coderslab.charity.services.DonationService;
 
 @Service
+@Transactional
 public class DefaultDonationService implements DonationService {
 
     private final DonationRepository donationRepository;

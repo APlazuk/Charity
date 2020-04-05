@@ -2,12 +2,14 @@ package pl.coderslab.charity.services.impl;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pl.coderslab.charity.dtos.RegistrationDTO;
 import pl.coderslab.charity.entities.User;
 import pl.coderslab.charity.repositories.UserRepository;
 import pl.coderslab.charity.services.RegistrationService;
 
 @Service
+@Transactional
 public class DefaultRegistrationService implements RegistrationService {
 
     private final UserRepository userRepository;
