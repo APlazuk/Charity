@@ -165,10 +165,65 @@ public class AdminController {
     }
 
     @RequestMapping("/deleteAdmin/{id}")
-    public String deleteIAdmin(@PathVariable Long id){
+    public String deleteAdmin(@PathVariable Long id){
 
         userService.deleteAdminById(id);
 
         return "redirect:/admin/admins";
+    }
+
+    @GetMapping("/users")
+    public String menageUsers() {
+        return "admin/users";
+    }
+
+    @GetMapping("/changeUserStatus/{id}/{active}")
+    public String changeUserStatus(@PathVariable Long id, @PathVariable Boolean active){
+        userService.changeUserStatus(id, active);
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/addUser")
+    public String addUser(Model model){
+        model.addAttribute("user", new RegistrationDTO());
+
+        return "admin/add-user";
+    }
+
+    @PostMapping("/addUser")
+    public String addUser(@Valid @ModelAttribute("user") RegistrationDTO user, BindingResult result){
+        if (result.hasErrors()){
+            return "admin/add-user";
+        }
+        userService.addUser(RegistrationConverter.from(user));
+
+        return "redirect:/admin/users";
+    }
+
+    @GetMapping("/editUser/{id}")
+    public String editUser(Model model, @PathVariable Long id) {
+        UserDTO editedUser = UserConverter.toUserDTO(userService.getUserById(id));
+        model.addAttribute("editedUser",editedUser);
+
+        return "admin/edit-user";
+    }
+
+    @PostMapping("/editUser/{id}")
+    public String editUser(@Valid @ModelAttribute ("editedUser") UserDTO editedUser, BindingResult result){
+        if (result.hasErrors()){
+            return "admin/edit-user";
+        }
+
+        userService.editUser(editedUser);
+
+        return "redirect:/admin/users";
+    }
+
+    @RequestMapping("/deleteUser/{id}")
+    public String deleteUser(@PathVariable Long id){
+
+        userService.deleteUserById(id);
+
+        return "redirect:/admin/users";
     }
 }

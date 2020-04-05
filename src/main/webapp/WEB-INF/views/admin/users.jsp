@@ -53,7 +53,7 @@
                     <td>${user.firstName}</td>
                     <td>${user.lastName}</td>
                     <td>
-                        <a class="btn--small btn--without-border" href="/admin/changeAdminStatus/${user.id}/${user.active}">Zmień</a>
+                        <a class="btn--small btn--without-border" href="/admin/changeUserStatus/${user.id}/${user.active}">Zmień</a>
                            <em>Aktywny: ${user.active}</em>
                     </td>
                     <td><a class="btn--small btn--without-border" href="/admin/editUser/${user.id}">Edytuj</a></td>

@@ -22,4 +22,14 @@ public interface UserService {
     User getAdminById(Long id);
 
     void deleteAdminById(Long id);
+
+    void changeUserStatus(Long id, Boolean active);
+
+    void addUser(User user);
+
+    User getUserById(Long id);
+
+    void editUser(UserDTO editedUser);
+
+    void deleteUserById(Long id);
 }

@@ -52,7 +52,7 @@
                 <span class="icon icon--courier"></span>
                 <h3>Użytkownicy</h3>
                 <div class="form-group form-group--buttons">
-                    <a href="#" type="button" class="btn btn--without-border" >Zarządzaj użytkownikami</a>
+                    <a href="/admin/users" type="button" class="btn btn--without-border" >Zarządzaj użytkownikami</a>
                 </div>
             </div>
         </div>

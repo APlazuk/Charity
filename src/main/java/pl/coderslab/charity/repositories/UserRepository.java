@@ -18,13 +18,23 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     List<User> findAllByRole(String role);
 
-    @Query(value = "SELECT * FROM user WHERE id = ? AND active = ?;", nativeQuery = true)
+    @Query(value = "SELECT * FROM user WHERE id = ? AND active = ? AND role = 'ROLE_ADMIN';", nativeQuery = true)
     User getAdminByIdAndStatus(Long id, Boolean active);
 
     @Query(value = "SELECT * FROM user WHERE id = ? AND role = 'ROLE_ADMIN';", nativeQuery = true)
     User getAdminById(Long id);
 
     @Modifying
-    @Query(value = "DELETE FROM user WHERE id = ?;", nativeQuery = true)
+    @Query(value = "DELETE FROM user WHERE id = ? AND role = 'ROLE_ADMIN';", nativeQuery = true)
+    void deleteAdminById(Long id);
+
+    @Query(value = "SELECT * FROM user WHERE id = ? AND active = ? AND role = 'ROLE_USER';", nativeQuery = true)
+    User getUserByIdAndStatus(Long id, Boolean active);
+
+    @Query(value = "SELECT * FROM user WHERE id = ? AND role = 'ROLE_USER';", nativeQuery = true)
+    User getUserById(Long id);
+
+    @Modifying
+    @Query(value = "DELETE FROM user WHERE id = ? AND role = 'ROLE_USER';", nativeQuery = true)
     void deleteUserById(Long id);
 }

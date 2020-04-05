@@ -31,27 +31,27 @@
 
 <section class="steps" id="steps">
 
-    <h2>Edytuj - Administratora</h2>
+    <h2>Edytuj - Użytkownika</h2>
 
     <div class="container--70 mx-auto mt-5">
 
-        <form:form cssStyle="font-size: medium" modelAttribute="editedAdmin"  method="post">
+        <form:form cssStyle="font-size: medium" modelAttribute="editedUser"  method="post">
 
             <div class="form-group">
-                <form:input path="username" type="text" placeholder="Nazwa Administratora" /></br>
+                    <form:input path="username" type="text" placeholder="Nazwa Użytkownika" /></br>
                 <form:errors path="username"/>
             </div>
 
             <div class="form-group">
-                <form:input path="email" type="text" placeholder="Email"/></br>
+                    <form:input path="email" type="text" placeholder="Email"/></br>
                 <form:errors path="email"/>
             </div>
             <div class="form-group">
-                <form:input path="firstName" type="text" placeholder="Imię"/></br>
+                    <form:input path="firstName" type="text" placeholder="Imię"/></br>
                 <form:errors path="firstName"/>
             </div>
             <div class="form-group">
-                <form:input path="lastName" type="text" placeholder="Nazwisko"/></br>
+                    <form:input path="lastName" type="text" placeholder="Nazwisko"/></br>
                 <form:errors path="lastName"/>
             </div>
             <div class="form-group">
@@ -66,7 +66,7 @@
                 <button type="submit" class="btn btn--without-border">Zatwierdź zmiany</button>
             </div>
         </form:form>
-        <a href="/admin/admins" class="btn btn--without-border">Wróc</a>
+        <a href="/admin/users" class="btn btn--without-border">Wróc</a>
 
     </div>
 </section>

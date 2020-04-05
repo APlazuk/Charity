@@ -3,7 +3,6 @@ package pl.coderslab.charity.services.impl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.coderslab.charity.converters.UserConverter;
 import pl.coderslab.charity.dtos.UserDTO;
 import pl.coderslab.charity.entities.User;
 import pl.coderslab.charity.repositories.UserRepository;
@@ -66,14 +65,14 @@ public class DefaultUserService implements UserService {
 
     @Override
     public void editAdmin(UserDTO editedAdmin) {
-        User user = userRepository.getOne(editedAdmin.getId());
-        user.setUsername(editedAdmin.getUsername());
-        user.setEmail(editedAdmin.getEmail());
-        user.setFirstName(editedAdmin.getFirstName());
-        user.setLastName(editedAdmin.getLastName());
-        user.setPassword(passwordEncoder.encode(editedAdmin.getPassword()));
+        User admin = userRepository.getOne(editedAdmin.getId());
+        admin.setUsername(editedAdmin.getUsername());
+        admin.setEmail(editedAdmin.getEmail());
+        admin.setFirstName(editedAdmin.getFirstName());
+        admin.setLastName(editedAdmin.getLastName());
+        admin.setPassword(passwordEncoder.encode(editedAdmin.getPassword()));
 
-        userRepository.save(user);
+        userRepository.save(admin);
     }
 
     @Override
@@ -83,6 +82,51 @@ public class DefaultUserService implements UserService {
 
     @Override
     public void deleteAdminById(Long id) {
+        userRepository.deleteAdminById(id);
+    }
+
+    @Override
+    public void changeUserStatus(Long id, Boolean active) {
+        Optional<User> user = Optional.ofNullable(userRepository.getUserByIdAndStatus(id, active));
+        if (user.isPresent()){
+            if (user.get().getActive())
+                user.get().setActive(false);
+            else if (!user.get().getActive()){
+                user.get().setActive(true);
+            }
+            userRepository.save(user.get());
+        }
+    }
+
+    @Override
+    public void addUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setActive(true);
+        user.setRole("ROLE_USER");
+
+        userRepository.save(user);
+    }
+
+    @Override
+    public User getUserById(Long id) {
+        return userRepository.getUserById(id);
+    }
+
+    @Override
+    public void editUser(UserDTO editedUser) {
+        User user = userRepository.getUserById(editedUser.getId());
+        user.setUsername(editedUser.getUsername());
+        user.setEmail(editedUser.getEmail());
+        user.setFirstName(editedUser.getFirstName());
+        user.setLastName(editedUser.getLastName());
+        user.setPassword(passwordEncoder.encode(editedUser.getPassword()));
+
+        userRepository.save(user);
+
+    }
+
+    @Override
+    public void deleteUserById(Long id) {
         userRepository.deleteUserById(id);
     }
 }

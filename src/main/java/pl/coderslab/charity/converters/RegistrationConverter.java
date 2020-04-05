@@ -21,7 +21,7 @@ public class RegistrationConverter {
         user.setUsername(registrationDTO.getUsername());
         user.setEmail(registrationDTO.getEmail());
         user.setFirstName(registrationDTO.getFirstName());
-        user.setLastName(registrationDTO.getFirstName());
+        user.setLastName(registrationDTO.getLastName());
         user.setRole(registrationDTO.getRole());
         user.setActive(registrationDTO.getActive());
         user.setPassword(registrationDTO.getPassword());
