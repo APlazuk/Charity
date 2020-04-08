@@ -3,7 +3,6 @@ package pl.coderslab.charity.services.impl;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.coderslab.charity.dtos.UserDTO;
 import pl.coderslab.charity.entities.User;
 import pl.coderslab.charity.repositories.UserRepository;
 import pl.coderslab.charity.services.UserService;
@@ -64,7 +63,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void editAdmin(UserDTO editedAdmin) {
+    public void editAdmin(User editedAdmin) {
         User admin = userRepository.getOne(editedAdmin.getId());
         admin.setUsername(editedAdmin.getUsername());
         admin.setEmail(editedAdmin.getEmail());
@@ -74,6 +73,7 @@ public class DefaultUserService implements UserService {
 
         userRepository.save(admin);
     }
+
 
     @Override
     public User getAdminById(Long id) {
@@ -113,7 +113,7 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public void editUser(UserDTO editedUser) {
+    public void editUser(User editedUser) {
         User user = userRepository.getUserById(editedUser.getId());
         user.setUsername(editedUser.getUsername());
         user.setEmail(editedUser.getEmail());
@@ -122,8 +122,8 @@ public class DefaultUserService implements UserService {
         user.setPassword(passwordEncoder.encode(editedUser.getPassword()));
 
         userRepository.save(user);
-
     }
+
 
     @Override
     public void deleteUserById(Long id) {

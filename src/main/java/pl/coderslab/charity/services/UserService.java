@@ -17,7 +17,7 @@ public interface UserService {
 
     void addUserAsAdmin(Long id);
 
-    void editAdmin(UserDTO editedAdmin);
+    void editAdmin(User editedAdmin);
 
     User getAdminById(Long id);
 
@@ -29,7 +29,7 @@ public interface UserService {
 
     User getUserById(Long id);
 
-    void editUser(UserDTO editedUser);
+    void editUser(User editedUser);
 
     void deleteUserById(Long id);
 }

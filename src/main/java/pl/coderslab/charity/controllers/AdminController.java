@@ -82,7 +82,7 @@ public class AdminController {
             return "admin/edit-institution";
         }
 
-        institutionService.editInstitution(editedInstitution);
+        institutionService.editInstitution(InstitutionConverter.from(editedInstitution));
 
         return "redirect:/admin/institutions";
     }
@@ -159,7 +159,7 @@ public class AdminController {
             return "admin/edit-admin";
         }
 
-        userService.editAdmin(editedAdmin);
+        userService.editAdmin(UserConverter.fromUserDTO(editedAdmin));
 
         return "redirect:/admin/admins";
     }
@@ -214,7 +214,7 @@ public class AdminController {
             return "admin/edit-user";
         }
 
-        userService.editUser(editedUser);
+        userService.editUser(UserConverter.fromUserDTO(editedUser));
 
         return "redirect:/admin/users";
     }

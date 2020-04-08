@@ -14,7 +14,7 @@ public interface InstitutionService {
     Institution getInstitutionById(Long id);
 
 
-    void editInstitution(InstitutionDTO editedInstitution);
+    void editInstitution(Institution editedInstitution);
 
     void deleteInstitutionById(Long id);
 }

@@ -38,13 +38,14 @@ public class DefaultInstitutionService implements InstitutionService {
     }
 
     @Override
-    public void editInstitution(InstitutionDTO editedInstitution) {
+    public void editInstitution(Institution editedInstitution) {
         Institution institution = institutionRepository.getOne(editedInstitution.getId());
         institution.setName(editedInstitution.getName());
         institution.setDescription(editedInstitution.getDescription());
 
         institutionRepository.save(institution);
     }
+
 
     @Override
     public void deleteInstitutionById(Long id) {
